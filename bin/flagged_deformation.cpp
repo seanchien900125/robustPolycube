@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
 
 
     // RUNNING
-    auto [scale, center] = ccenter_and_normalise_mesh(surf);
+    auto [scale, center] = center_and_normalise_mesh(surf);
     Trace::drop_facet_scalar(surf, flag, "flagging");
 
     Tetrahedra m;
