@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
 
 
     // RUNNING
-    center_and_normalise_mesh(surf);
+    auto [scale, center] = ccenter_and_normalise_mesh(surf);
     Trace::drop_facet_scalar(surf, flag, "flagging");
 
     Tetrahedra m;
@@ -104,6 +104,11 @@ int main(int argc, char** argv) {
     remove_outerbox(m, cfflags, inside);
     disp_polycube(m, U, cfflags, "corrected");
 
+    // Recover original scale and position
+    FOR(v, m.nverts()) {
+		m.points[v] = m.points[v] * scale + center;
+		U[v] = U[v] * scale + center;
+    }
 
     // SAVING
 
